@@ -22,7 +22,7 @@ var moreFruits = function(fruits) {
 // use _.each to traverse the number array and determine
 // which are multiples of five.
 var multiplesOfFive = function(numbers) {
-  var count = 0
+  var count = 0;
   _.each(numbers, function(number, index, collection) {
     if (number % 5 === 0) {
       count ++;
@@ -49,11 +49,16 @@ var onlyOneFruit = function(fruits, targetFruit) {
 // use _.filter to return the fruits array with only fruits
 // starting with the letter 'P'.
 var startsWith = function(fruits, letter) {
-
+  return _.filter(fruits, function(fruit, index) {
+    return fruit.indexOf(letter) === 0;
+  });
 };
 
 // return a filtered array containing only cookie-type desserts.
 var cookiesOnly = function(desserts) {
+  return _.filter(desserts, function (currentDessert) {
+    return currentDessert.type === 'cookie';
+  });
 
 };
 
@@ -65,26 +70,49 @@ var cookiesOnly = function(desserts) {
 
 // return the total price of all products.
 var sumTotal = function(products) {
-
+  return _.reduce(products, function (memo, currentItem) {
+    var price$ = currentItem.price;
+    var price = Number(price$.slice(1, price$.length));
+    return memo += price;
+  }, 0);
 };
 
 // return an object consisting of dessert types and how many of each.
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
 var dessertCategories = function(desserts) {
-
+  var result = {};
+  _.reduce (desserts, function(memo, dessert) {
+    if (result[dessert.type] === undefined) {
+      result[dessert.type] = 1;
+    } else {
+      result[dessert.type]++;
+    }
+  }, result);
+  return result;
 };
 
 // given an array of movie data objects,return an array containing
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function(movies) {
-
+  var result = [];
+  _.reduce (movies, function (memo, movie) {
+    var year = movie.releaseYear;
+    if (year < 2000 && year > 1990) {
+      result.push(movie.title);
+    }
+  }, result);
+  return result;
 };
 
 // return an boolean stating if there exists a movie with a shorter
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
+
+
+
+
 
 };
 
